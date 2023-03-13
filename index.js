@@ -53,7 +53,7 @@ const questions = [
         validate: validateInput,
     },
 
-    // Table of Contents, andling this in the markdown.js
+    // Table of Contents, this in the markdown.js
 
     // Question for Installation
     {
@@ -143,7 +143,7 @@ function init() {
     inquirer.prompt(questions).then((data) => {
         console.log(JSON.stringify(data, null, " "));
         data.getLicense = getLicense(data.license);
-        writeToFile("./example/README.md", data);
+        writeToFile("./Users/hira/Desktop/bootcamp/Profreadme/example", data);
     });
 }
 
