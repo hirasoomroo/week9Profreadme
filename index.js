@@ -143,7 +143,7 @@ function init() {
     inquirer.prompt(questions).then((data) => {
         console.log(JSON.stringify(data, null, " "));
         data.getLicense = getLicense(data.license);
-        writeToFile("./Users/hira/Desktop/bootcamp/Profreadme/example", data);
+        writeToFile(".//Users/hira/Desktop/bootcamp/Profreadme/example/ReadMe", data);
     });
 }
 
