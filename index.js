@@ -1,11 +1,8 @@
-// need the const fs variable here
-const fs = require("fs");
+const inquirer = require('inquirer');
+const fs = require('fs');
 
-// need inquirer variable here
-const inquirer = require("inquirer");
+const generateMarkdown = require("./filedata");
 
-// need a markdown js file here
-const generateMarkdown = require("./Generatemarkdown");
 
 
 // License function and  if/else section here 
@@ -53,7 +50,7 @@ const questions = [
         validate: validateInput,
     },
 
-    // Table of Contents, this in the markdown.js
+    
 
     // Question for Installation
     {
@@ -127,25 +124,41 @@ const questions = [
     },
 ];
 
-
-// function to generate the ReadMe here
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, generateMarkdown(data), function (err) {
-        if (err) {
-            return console.log(err);
-        }
-    });
+    fs.writeFile(fileName, generateMarkdown(data), (err) =>
+      err ? console.error(err) : console.log('Success!')
+    );
+  }
+  
+
+
+  function writeToFile(fileName, data) {
+    const dir = './example';
+
+    // create the directory if it does not exist
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+
+    // write the data to the file
+    fs.writeFile(fileName, generateMarkdown(data), (err) =>
+        err ? console.error(err) : console.log("README file created successfully!")
+    );
 }
 
-
-// function to initalize the beginning of the questions 
 function init() {
     inquirer.prompt(questions).then((data) => {
         console.log(JSON.stringify(data, null, " "));
         data.getLicense = getLicense(data.license);
-        writeToFile(".//Users/hira/Desktop/bootcamp/Profreadme/example/ReadMe", data);
+        writeToFile("./example/README.md", data);
     });
 }
 
 // call the function to initalize the beginning of the questions 
 init();
+
+
+
+
+
+
